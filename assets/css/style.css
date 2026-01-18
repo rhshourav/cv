@@ -114,10 +114,34 @@ a:focus{ outline:none; box-shadow: var(--focus); border-radius: 12px; }
   border-bottom: 1px solid var(--stroke);
 }
 /* Navbar button sizing (reuses .btn theme) */
-.nav-btn{
-  padding: 10px 12px;
-  font-weight: 800;
-  box-shadow: var(--shadow2);
+.nav-btn {
+  padding: 7px 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 999px; /* pill shape */
+  line-height: 1;
+}
+.nav-btn {
+  position: relative;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.nav-btn:hover,
+.nav-btn:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow3);
+  filter: brightness(1.05);
+}
+@keyframes softPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.25); }
+  100% { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+}
+
+.nav-btn {
+  animation: softPulse 1.6s ease-out 1;
 }
 
 .nav-inner{
