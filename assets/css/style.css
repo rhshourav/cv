@@ -120,11 +120,20 @@ a:focus{ outline:none; box-shadow: var(--focus); border-radius: 12px; }
 .brand-dot{
   width: 34px;
   height: 34px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--a3), var(--a2));
+  min-width: 34px;
+  min-height: 34px;
+
+  border-radius: 10px;
+  object-fit: cover;      /* critical for images */
+  object-position: center;
+
   box-shadow: var(--shadow2);
-  border: 1px solid rgba(255,255,255,.35);
+  border: 1px solid var(--stroke);
+
+  flex-shrink: 0;         /* prevents flex growth */
+  display: block;
 }
+
 .brand small{
   display:block;
   font-weight:600;
