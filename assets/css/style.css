@@ -174,20 +174,82 @@ a:focus{ outline:none; box-shadow: var(--focus); border-radius: 12px; }
 
 /* Theme toggle button */
 .theme-toggle{
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 999px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,255,255,0.85);   /* FORCE visibility */
   border: 1px solid var(--stroke);
-  background: color-mix(in srgb, var(--card2) 80%, transparent);
   box-shadow: var(--shadow2);
+
   cursor: pointer;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  transition: transform .15s ease, background .15s ease;
+  flex-shrink: 0;
+  position: relative;
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.18s ease;
 }
-.theme-toggle:hover{ transform: translateY(-1px); }
-.theme-icon{ font-size: 18px; }
+
+.theme-svg{
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: #0f172a;              /* light mode icon color */
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke .25s ease;
+}
+
+html[data-theme="dark"] .theme-svg{
+  stroke: #e7eaf3;              /* dark mode icon color */
+}
+
+/* Sun core (circle) */
+.theme-svg .sun{
+  opacity: 1;
+  transform-origin: 12px 12px;  /* center of viewBox */
+  transform: scale(1) rotate(0deg);
+  transition: opacity .25s ease, transform .45s cubic-bezier(.4,0,.2,1);
+}
+
+/* Rays */
+.theme-svg .rays{
+  opacity: 1;
+  transform-origin: 12px 12px;
+  transform: rotate(0deg) scale(1);
+  transition: opacity .25s ease, transform .45s cubic-bezier(.4,0,.2,1);
+}
+
+/* Moon (masked circle) */
+.theme-svg .moon{
+  opacity: 0;
+  transform-origin: 12px 12px;
+  transform: scale(0.6) rotate(-25deg);
+  transition: opacity .25s ease, transform .45s cubic-bezier(.4,0,.2,1);
+}
+
+/* Dark theme state -> triggers animation */
+html[data-theme="dark"] .theme-svg .sun{
+  opacity: 0;
+  transform: scale(0.75) rotate(90deg);
+}
+
+html[data-theme="dark"] .theme-svg .rays{
+  opacity: 0;
+  transform: rotate(120deg) scale(0.8);
+}
+
+html[data-theme="dark"] .theme-svg .moon{
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
 
 /* 5) HERO */
 .hero{ padding: var(--sp-8) 0 var(--sp-7); }

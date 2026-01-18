@@ -14,8 +14,6 @@
   // ---------------------------
   const html = document.documentElement;
   const toggleBtn = document.getElementById("themeToggle");
-  const icon = toggleBtn ? toggleBtn.querySelector(".theme-icon") : null;
-
   const STORAGE_KEY = "shourav_theme";
 
   function getSystemTheme() {
@@ -25,25 +23,23 @@
   }
 
   function applyTheme(theme) {
+    // THIS is the key line: CSS animations depend on this attribute
     html.setAttribute("data-theme", theme);
 
-    // Update toggle UI (me: keep it obvious)
-    if (toggleBtn && icon) {
+    // Update button accessibility state (SVG animation is handled by CSS)
+    if (toggleBtn) {
       const isDark = theme === "dark";
       toggleBtn.setAttribute("aria-pressed", String(isDark));
-      icon.textContent = isDark ? "☀" : "☾";
       toggleBtn.title = isDark ? "Switch to light mode" : "Switch to dark mode";
     }
   }
 
   // Initial theme load:
-  // - Use saved theme if exists
-  // - Otherwise use system preference
   const saved = localStorage.getItem(STORAGE_KEY);
   const initial = saved || getSystemTheme();
   applyTheme(initial);
 
-  // Toggle handler
+  // Toggle handler:
   if (toggleBtn) {
     toggleBtn.addEventListener("click", () => {
       const current = html.getAttribute("data-theme") || "light";
@@ -53,14 +49,10 @@
     });
   }
 
-  // Optional: if user never set a preference, follow system changes dynamically
-  // (me: only do this when no saved preference exists)
+  // Follow system changes ONLY if user has not chosen manually
   if (!saved && window.matchMedia) {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    mq.addEventListener("change", () => {
-      const systemTheme = getSystemTheme();
-      applyTheme(systemTheme);
-    });
+    mq.addEventListener("change", () => applyTheme(getSystemTheme()));
   }
 
   // ---------------------------
@@ -94,12 +86,11 @@
         }
       }
 
-      const speed = deleting ? 40 : 70;
-      setTimeout(tick, speed);
+      setTimeout(tick, deleting ? 40 : 70);
     }
+
     tick();
 
-    // Cursor blink
     setInterval(() => {
       cursorEl.style.opacity = (cursorEl.style.opacity === "0" ? "1" : "0");
     }, 520);
@@ -113,7 +104,7 @@
   const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
 
   function setActiveNav() {
-    const y = window.scrollY + 140; // offset for sticky nav
+    const y = window.scrollY + 140;
     let current = sectionIds[0];
 
     for (const s of sections) {
