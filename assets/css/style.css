@@ -5,7 +5,17 @@
   - Layout, cards, timeline, chips, tools grid, contact
   ============================================================
 */
-
+/* =========================
+   Custom Font: Macondo Swash Caps
+   File: assets/font/MacondoSwashCaps-Regular.ttf
+========================= */
+@font-face{
+  font-family: "MacondoSwashCaps";
+  src: url("../font/MacondoSwashCaps-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 /* 1) THEME TOKENS (Light default) */
 :root{
   --bg-base: #ffffff;
@@ -173,6 +183,7 @@ a:focus{ outline:none; box-shadow: var(--focus); border-radius: 12px; }
 }
 
 /* Theme toggle button */
+/* Base (light) */
 .theme-toggle{
   width: 46px;
   height: 46px;
@@ -182,18 +193,43 @@ a:focus{ outline:none; box-shadow: var(--focus); border-radius: 12px; }
   align-items: center;
   justify-content: center;
 
-  background: rgba(255,255,255,0.85);   /* FORCE visibility */
-  border: 1px solid var(--stroke);
-  box-shadow: var(--shadow2);
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(15,23,42,0.12);
+  box-shadow: 0 10px 25px rgba(15,23,42,0.12);
 
   cursor: pointer;
   flex-shrink: 0;
-  position: relative;
 
-  transition:
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.18s ease;
+  transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, transform .18s ease;
+}
+
+.theme-toggle:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.85);
+}
+
+.theme-toggle:active{
+  transform: translateY(0) scale(0.98);
+}
+
+.theme-toggle:focus{
+  outline: none;
+  box-shadow: var(--focus), 0 10px 25px rgba(15,23,42,0.12);
+}
+
+/* IMPORTANT: remove the extra "shine" ring if you added ::before earlier */
+.theme-toggle::before{ display:none; }
+
+/* Dark mode (fix the white circle issue) */
+html[data-theme="dark"] .theme-toggle{
+  background: rgba(18, 22, 40, 0.78);      /* dark glass */
+  border: 1px solid rgba(231,234,243,0.14); /* subtle border */
+  box-shadow: 0 14px 34px rgba(0,0,0,0.55); /* depth */
+}
+
+html[data-theme="dark"] .theme-toggle:hover{
+  background: rgba(22, 28, 52, 0.86);
+  border-color: rgba(231,234,243,0.18);
 }
 
 .theme-svg{
@@ -258,6 +294,96 @@ html[data-theme="dark"] .theme-svg .moon{
   grid-template-columns: 1.2fr .8fr;
   gap: var(--sp-6);
   align-items: center;
+}
+/* -------------------------
+   Hero title typography + animation
+-------------------------- */
+.hero-title{
+  margin: 14px 0 10px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.hero-line{
+  display: block;                 /* each line on its own row */
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(6px);              /* elegant soften-in */
+  animation: heroIn 900ms cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+/* 1st line: your script font */
+.hero-line--script{
+  font-family: "MacondoSwashCaps", "Poppins", system-ui, sans-serif;
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 400;
+  color: var(--ink);
+  animation-delay: 120ms;
+}
+
+/* 2nd line: modern strong contrast */
+.hero-line--bold{
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(20px, 2.2vw, 32px);
+  font-weight: 800;
+  color: var(--muted);
+  margin-top: 10px;
+  animation-delay: 320ms;
+}
+
+/* Highlight the quoted part with an animated underline */
+.hero-quote{
+  color: var(--ink);
+  position: relative;
+  display: inline-block;
+}
+
+/* underline highlight */
+.hero-quote::after{
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: -10px;
+  height: 12px;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--a3) 70%, transparent),
+    color-mix(in srgb, var(--a2) 70%, transparent)
+  );
+
+  transform: scaleX(0.15);
+  transform-origin: left;
+  opacity: 0.0;
+
+  animation: underlineIn 700ms ease forwards;
+  animation-delay: 720ms;
+}
+
+@keyframes heroIn{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes underlineIn{
+  to{
+    opacity: 0.85;
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-line,
+  .hero-quote::after{
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
 
 .glass{
