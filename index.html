@@ -354,35 +354,9 @@
       </div>
 
       <div class="contact-grid">
-        
-<div class="card span-2">
-  <h3>Anonymous Message</h3>
-  <p class="muted small">
-    Send a message via my Cloudflare Worker. No name required.
-  </p>
 
-  <form id="anonForm" class="anon-form" autocomplete="off" novalidate>
-    <!-- Honeypot (bots fill this; humans won't) -->
-    <input type="text" id="website" name="website" class="hp" tabindex="-1" autocomplete="off" />
-
-    <label class="field">
-      <span class="label">Message</span>
-      <textarea
-        id="anonMessage"
-        class="control"
-        rows="5"
-        maxlength="1200"
-        placeholder="Write your message... (max 1200 chars)"
-        required
-      ></textarea>
-    </label>
-
-    <div class="action-row">
-      <button type="submit" class="btn primary nav-btn">Send</button>
-      <span id="anonStatus" class="muted small" aria-live="polite"></span>
-    </div>
-
-<div class="card">
+        <!-- Card 1: Reach Me -->
+        <div class="card">
           <h3>Reach Me</h3>
 
           <div class="contact-list">
@@ -390,22 +364,27 @@
               <div class="k">Phone</div>
               <div class="v"><a href="tel:+8801755448683">+8801755448683</a></div>
             </div>
+
             <div class="contact-item">
               <div class="k">Email</div>
               <div class="v"><a href="mailto:rhshourav02@gmail.com">rhshourav02@gmail.com</a></div>
             </div>
+
             <div class="contact-item">
               <div class="k">Work Email</div>
               <div class="v"><a href="mailto:shourav.it@mainland-bd.com">shourav.it@mainland-bd.com</a></div>
             </div>
+
             <div class="contact-item">
               <div class="k">LinkedIn</div>
               <div class="v"><a href="https://www.linkedin.com/in/rhshourav" target="_blank" rel="noopener">linkedin.com/in/rhshourav</a></div>
             </div>
+
             <div class="contact-item">
               <div class="k">GitHub</div>
               <div class="v"><a href="https://github.com/rhshourav" target="_blank" rel="noopener">github.com/rhshourav</a></div>
             </div>
+
             <div class="contact-item">
               <div class="k">TryHackMe</div>
               <div class="v"><a href="https://tryhackme.com/p/rhshourav.og" target="_blank" rel="noopener">tryhackme.com/p/rhshourav.og</a></div>
@@ -413,20 +392,50 @@
           </div>
         </div>
 
+        <!-- Card 2: Target Roles -->
         <div class="card">
           <h3>Target Roles</h3>
           <p class="muted small">
             Roles that combine <strong>secure operations</strong> and <strong>automation</strong>:
             IT Officer / SysAdmin, Jr. DevOps, SOC/Blue-Team trainee roles, or security-focused IT operations.
           </p>
-</form>
-</div>
 
           <div class="mt-14 action-row">
             <a class="btn primary" href="mailto:rhshourav02@gmail.com?subject=Interview%20Opportunity%20-%20MD%20Shourav%20Hossain">Email Me</a>
             <a class="btn" href="https://github.com/rhshourav" target="_blank" rel="noopener">View GitHub</a>
           </div>
         </div>
+
+        <!-- Card 3: Anonymous Message (FULL WIDTH, AT BOTTOM) -->
+        <div class="card span-2">
+          <h3>Anonymous Message</h3>
+          <p class="muted small">
+            Send a message via my Cloudflare Worker. No name required.
+          </p>
+
+          <form id="anonForm" class="anon-form" autocomplete="off" novalidate>
+            <!-- Honeypot -->
+            <input type="text" id="website" name="website" class="hp" tabindex="-1" autocomplete="off" />
+
+            <label class="field">
+              <span class="label">Message</span>
+              <textarea
+                id="anonMessage"
+                class="control"
+                rows="5"
+                maxlength="1200"
+                placeholder="Write your message... (max 1200 chars)"
+                required
+              ></textarea>
+            </label>
+
+            <div class="action-row">
+              <button type="submit" class="btn primary nav-btn">Send</button>
+              <span id="anonStatus" class="muted small" aria-live="polite"></span>
+            </div>
+          </form>
+        </div>
+
       </div>
 
       <div class="footer">
@@ -434,6 +443,8 @@
       </div>
     </div>
   </section>
+
+
 
   <!-- Main JS -->
   <script src="assets/js/main.js"></script>
