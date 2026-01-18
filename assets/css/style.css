@@ -733,6 +733,30 @@ html[data-theme="dark"] .theme-svg .moon{
   font-weight: 700;
   overflow-wrap:anywhere;
 }
+/* Anonymous Message — prominent style */
+#contact .card.span-2 {
+  border: 1px solid var(--a3);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--a3) 30%, transparent);
+}
+
+#contact .card.span-2 h3 {
+  color: var(--a3);
+}
+
+#contact .card.span-2::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    color-mix(in srgb, var(--a3) 18%, transparent) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
 .footer{
   padding: var(--sp-6) 0 var(--sp-7);
   color: var(--soft);
