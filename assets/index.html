@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <!--
+    ============================================================
+    MD Shourav Hossain - Resume Website
+    Files:
+      - index.html
+      - assets/css/style.css
+      - assets/js/main.js
+    ============================================================
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MD Shourav Hossain | IT Officer • DevOps • Cybersecurity</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <!-- Sticky Navbar -->
+  <header class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Go to top">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span class="brand-text">
+            MD Shourav Hossain
+            <small>IT Officer • DevOps • Cybersecurity</small>
+          </span>
+        </a>
+
+        <div class="nav-right">
+          <nav class="nav-links" aria-label="Primary">
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#contact">Contact</a>
+          </nav>
+
+          <!-- Theme toggle (me: keep it visible, simple, and persistent) -->
+          <button
+            id="themeToggle"
+            class="theme-toggle"
+            type="button"
+            aria-label="Toggle dark mode"
+            aria-pressed="false"
+            title="Toggle dark mode"
+          >
+            <span class="theme-icon" aria-hidden="true">☾</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left: Intro -->
+        <section class="glass hero-card" aria-label="Intro">
+          <span class="kicker">
+            <span class="pulse" aria-hidden="true"></span>
+            Open to serious roles in IT / Security / DevOps
+          </span>
+
+          <h1>Build secure, stable systems.<br>Not “just IT support”.</h1>
+
+          <div class="role">
+            IT Officer & DevOps Engineer • System Hardening • Monitoring • Incident Prevention
+          </div>
+
+          <!-- Typing highlight (me: keep it short so it doesn't look like a gimmick) -->
+          <div class="typing" aria-live="polite">
+            <span id="typingText"></span><span id="cursor">▍</span>
+          </div>
+
+          <p class="summary">
+            I work across Linux and Windows environments to keep infrastructure reliable, monitored, and secure.
+            My focus is disciplined operations: access control, hardening, vulnerability discovery, and automation.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#contact">Contact Me</a>
+            <a class="btn" href="https://www.linkedin.com/in/rhshourav" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://github.com/rhshourav" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" href="https://tryhackme.com/p/rhshourav.og" target="_blank" rel="noopener">TryHackMe</a>
+          </div>
+
+          <div class="quick" aria-label="Quick highlights">
+            <span class="pill">ERP + Infrastructure Ops</span>
+            <span class="pill">Monitoring & Security Tooling</span>
+            <span class="pill">Docker Fundamentals</span>
+            <span class="pill">Basic Network Pentesting</span>
+          </div>
+        </section>
+
+        <!-- Right: Profile / Stats -->
+        <aside class="glass profile-card" aria-label="Profile summary">
+          <div class="avatar" role="img" aria-label="Profile photo placeholder">
+            <!-- Me: replace this with your real headshot ASAP. -->
+            <!-- <img src="assets/images/profile.jpg" alt="MD Shourav Hossain"> -->
+            <div class="placeholder">
+              Add your photo here<br>
+              <span class="placeholder-sub">(Recommended: clean headshot, neutral background)</span>
+            </div>
+          </div>
+
+          <div class="mini-grid" aria-label="Quick facts">
+            <div class="mini">
+              <div class="label">Location</div>
+              <div class="value">Dhaka, Bangladesh</div>
+            </div>
+            <div class="mini">
+              <div class="label">Current Role</div>
+              <div class="value">IT Officer</div>
+            </div>
+            <div class="mini">
+              <div class="label">Focus</div>
+              <div class="value">Security + Ops</div>
+            </div>
+            <div class="mini">
+              <div class="label">Study</div>
+              <div class="value">BSc CSE (Ongoing)</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Experience</h2>
+          <p class="section-sub">Timeline format: faster to scan, more credible than random boxes.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="timeline">
+          <div class="t-item">
+            <span class="t-dot" aria-hidden="true"></span>
+            <p class="t-role">IT Officer — Unimas Sportswear Limited (Mainland Holdings Ltd., HK)</p>
+            <div class="t-meta">Bagbari, Kashimpur, Gazipur • Oct 2022 — Present</div>
+            <ul class="t-bullets">
+              <li>Operate and maintain ERP systems and supporting infrastructure with uptime and data integrity focus.</li>
+              <li>Coordinate daily IT operations (roles, tasks, team alignment) to keep workflows stable.</li>
+              <li>Maintain and optimize network infrastructure for reliable connectivity and performance.</li>
+              <li>Apply cybersecurity best practices: access control hygiene, system hardening, incident prevention.</li>
+              <li>Perform basic network penetration testing to identify vulnerabilities and support risk mitigation.</li>
+              <li>Collaborate cross-functionally to align IT solutions with business needs and operational efficiency.</li>
+            </ul>
+          </div>
+
+          <div class="t-item t-item-last">
+            <span class="t-dot" aria-hidden="true"></span>
+            <p class="t-role">Jr. IT Support Officer — Ishwardi EPZ</p>
+            <div class="t-meta">Ishwardi, Pakshi, Pabna • Feb 2022 — Aug 2022</div>
+            <ul class="t-bullets">
+              <li>Maintained network lines and CCTV system reliability across the facility.</li>
+              <li>Troubleshot network connectivity issues and restored service quickly to reduce downtime.</li>
+              <li>Installed and maintained CCTV cameras for continuous operational visibility.</li>
+              <li>Delivered hands-on technical support for daily IT needs with a security-aware mindset.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Education</h2>
+          <p class="section-sub">Short, clean, and recruiter-friendly.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>BSc in Computer Science (Ongoing)</h3>
+          <p class="muted small"><strong>Northern University Bangladesh</strong><br>Ashkona, Dakshinkhan, Dhaka-1230</p>
+          <p class="muted small">CGPA: On-going</p>
+        </div>
+
+        <div class="card">
+          <h3>Diploma in Electrical Engineering</h3>
+          <p class="muted small"><strong>Bangladesh Polytechnic Institute</strong><br>Rajshahi</p>
+          <p class="muted small">CGPA: 3.59 (Completed Feb 2021)</p>
+        </div>
+
+        <div class="card">
+          <h3>Secondary School Certificate</h3>
+          <p class="muted small"><strong>Biddut Unnayan Board High School</strong><br>Bheramara, Kushtia</p>
+          <p class="muted small">GPA: 4.27 (Completed Jan 2017)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Skills</h2>
+          <p class="section-sub">Chips for scanning + tools grid for credibility.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Core Capabilities</h3>
+          <div class="chips" aria-label="Skill chips">
+            <span class="chip"><strong>Cybersecurity</strong> fundamentals</span>
+            <span class="chip"><strong>System hardening</strong> (Win/Linux)</span>
+            <span class="chip"><strong>Monitoring</strong> & alerting</span>
+            <span class="chip"><strong>Access control</strong> hygiene</span>
+            <span class="chip"><strong>CI/CD</strong> concepts</span>
+            <span class="chip"><strong>Docker</strong> fundamentals</span>
+            <span class="chip"><strong>Cloudflare Workers</strong> deployments</span>
+            <span class="chip"><strong>Network pentesting</strong> (basic)</span>
+            <span class="chip"><strong>Python</strong> scripting</span>
+            <span class="chip"><strong>HTML/CSS</strong> front-end</span>
+          </div>
+
+          <p class="muted small mt-14">
+            I focus on operational reliability + security discipline, and I keep building depth.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Security / Ops Tooling</h3>
+          <div class="tools" aria-label="Tools list">
+            <div class="tool"><div class="name">Nmap</div><div class="desc">Recon and validation.</div></div>
+            <div class="tool"><div class="name">Wireshark</div><div class="desc">Traffic analysis.</div></div>
+            <div class="tool"><div class="name">Nessus</div><div class="desc">Vulnerability workflows.</div></div>
+            <div class="tool"><div class="name">Burp Suite</div><div class="desc">Web testing basics.</div></div>
+            <div class="tool"><div class="name">Metasploit</div><div class="desc">Controlled lab use.</div></div>
+            <div class="tool"><div class="name">Git / GitHub</div><div class="desc">Version control.</div></div>
+            <div class="tool"><div class="name">Docker</div><div class="desc">Packaging fundamentals.</div></div>
+            <div class="tool"><div class="name">Cloudflare Workers</div><div class="desc">Lightweight services.</div></div>
+            <div class="tool"><div class="name">Monitoring</div><div class="desc">Uptime + posture awareness.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Achievements</h2>
+          <p class="section-sub">Proof beats claims.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>TryHackMe Milestones</h3>
+          <ul class="ach-list">
+            <li><strong>Pre Security Certification</strong> (Nov 2025) — Credential ID: THM-BGYIYHOFHF</li>
+            <li><strong>Advent of Cyber 2025</strong> — Cloud security, detection engineering, threat simulation, incident response</li>
+            <li><strong>Advent of Cyber 2024</strong> — Cloud security, detection engineering, threat simulation</li>
+            <li><strong>Advent of Cyber 2023</strong> — Web app security, malware analysis, blue team tactics</li>
+            <li><strong>Advent of Cyber 2021</strong> (May 2022) — Networking, secure coding, cryptography</li>
+            <li><strong>Advent of Cyber 2020</strong> (Jul 2021) — Fundamentals, password attacks, privilege escalation</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Public Badge</h3>
+          <div class="badge-wrap" aria-label="TryHackMe badge">
+            <iframe
+              src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=533634"
+              style="border:none;"
+              loading="lazy"
+              title="TryHackMe Public Profile Badge"
+            ></iframe>
+          </div>
+          <p class="muted small mt-14">
+            If the badge fails to load, it’s typically iframe blocking or network restrictions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Contact</h2>
+          <p class="section-sub">Make it effortless for someone to reach you.</p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card">
+          <h3>Reach Me</h3>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="k">Phone</div>
+              <div class="v"><a href="tel:+8801755448683">+8801755448683</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="k">Email</div>
+              <div class="v"><a href="mailto:rhshourav02@gmail.com">rhshourav02@gmail.com</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="k">Work Email</div>
+              <div class="v"><a href="mailto:shourav.it@mainland-bd.com">shourav.it@mainland-bd.com</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="k">LinkedIn</div>
+              <div class="v"><a href="https://www.linkedin.com/in/rhshourav" target="_blank" rel="noopener">linkedin.com/in/rhshourav</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="k">GitHub</div>
+              <div class="v"><a href="https://github.com/rhshourav" target="_blank" rel="noopener">github.com/rhshourav</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="k">TryHackMe</div>
+              <div class="v"><a href="https://tryhackme.com/p/rhshourav.og" target="_blank" rel="noopener">tryhackme.com/p/rhshourav.og</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Target Roles</h3>
+          <p class="muted small">
+            Roles that combine <strong>secure operations</strong> and <strong>automation</strong>:
+            IT Officer / SysAdmin, Jr. DevOps, SOC/Blue-Team trainee roles, or security-focused IT operations.
+          </p>
+
+          <div class="mt-14 action-row">
+            <a class="btn primary" href="mailto:rhshourav02@gmail.com?subject=Interview%20Opportunity%20-%20MD%20Shourav%20Hossain">Email Me</a>
+            <a class="btn" href="https://github.com/rhshourav" target="_blank" rel="noopener">View GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        © <span id="year"></span> MD Shourav Hossain • Built for clarity, not noise.
+      </div>
+    </div>
+  </section>
+
+  <!-- Main JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
