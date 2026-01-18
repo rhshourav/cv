@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    =============================================
+    Shourav's Resume Website (Single File)
+    - Pastel / glassmorphism theme
+    - Card-based layout, timeline experience
+    - Skill chips, tools grid, achievements + TryHackMe badge
+    - Minimal JS: typing effect + active nav highlight
+    =============================================
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MD Shourav Hossain | IT Officer • DevOps • Cybersecurity</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /*
+      =============================================
+      1) Design Tokens (colors, spacing, radius)
+      =============================================
+    */
+    :root{
+      --bg-0: #fbfbff;
+      --bg-1: #f5fbff;
+      --bg-2: #fbf6ff;
+
+      --ink: #0f172a;        /* slate-900 */
+      --muted: #475569;      /* slate-600 */
+      --soft: #64748b;       /* slate-500 */
+
+      --card: rgba(255,255,255,.68);
+      --card2: rgba(255,255,255,.56);
+      --stroke: rgba(15,23,42,.10);
+
+      /* Pastel accents */
+      --a1: #a7f3d0;  /* mint */
+      --a2: #c4b5fd;  /* lavender */
+      --a3: #93c5fd;  /* sky */
+      --a4: #fbcfe8;  /* pink */
+
+      --shadow: 0 16px 40px rgba(15, 23, 42, .10);
+      --shadow2: 0 10px 22px rgba(15, 23, 42, .08);
+
+      --r-lg: 24px;
+      --r-md: 18px;
+      --r-sm: 14px;
+
+      --max: 1100px;
+
+      --sp-1: 8px;
+      --sp-2: 12px;
+      --sp-3: 16px;
+      --sp-4: 20px;
+      --sp-5: 28px;
+      --sp-6: 36px;
+      --sp-7: 52px;
+      --sp-8: 72px;
+
+      --focus: 0 0 0 4px rgba(147,197,253,.55);
+    }
+
+    /*
+      =============================================
+      2) Base / Reset
+      =============================================
+    */
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 450px at 10% 10%, var(--a3) 0%, transparent 60%),
+        radial-gradient(900px 500px at 90% 20%, var(--a2) 0%, transparent 55%),
+        radial-gradient(900px 520px at 20% 90%, var(--a1) 0%, transparent 60%),
+        radial-gradient(900px 520px at 95% 85%, var(--a4) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      min-height:100vh;
+    }
+
+    a{
+      color: inherit;
+      text-decoration: none;
+    }
+    a:focus{ outline:none; box-shadow: var(--focus); border-radius: 12px; }
+    img{ max-width:100%; display:block; }
+
+    .container{
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 0 var(--sp-4);
+    }
+
+    /*
+      =============================================
+      3) Top Navigation (sticky glass)
+      =============================================
+    */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,.55);
+      border-bottom: 1px solid var(--stroke);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: var(--sp-3);
+      padding: 14px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .brand-dot{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--a3), var(--a2));
+      box-shadow: var(--shadow2);
+      border: 1px solid rgba(255,255,255,.75);
+    }
+    .brand small{
+      display:block;
+      font-weight:600;
+      color: var(--muted);
+      letter-spacing: 0;
+      margin-top: 1px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap: 8px;
+      align-items:center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a{
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .nav-links a:hover{
+      background: rgba(255,255,255,.55);
+      border-color: var(--stroke);
+      transform: translateY(-1px);
+      color: var(--ink);
+    }
+    .nav-links a.active{
+      background: rgba(147,197,253,.25);
+      border-color: rgba(147,197,253,.45);
+      color: var(--ink);
+    }
+
+    /*
+      =============================================
+      4) Hero
+      =============================================
+    */
+    .hero{
+      padding: var(--sp-8) 0 var(--sp-7);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: var(--sp-6);
+      align-items: center;
+    }
+
+    .glass{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow:hidden;
+    }
+    .glass::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(380px 240px at 20% 0%, rgba(147,197,253,.35), transparent 60%),
+        radial-gradient(420px 260px at 80% 10%, rgba(196,181,253,.33), transparent 60%),
+        radial-gradient(420px 260px at 70% 100%, rgba(167,243,208,.28), transparent 60%);
+      opacity: .85;
+      pointer-events:none;
+    }
+
+    .hero-card{
+      padding: var(--sp-6);
+    }
+    .kicker{
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid var(--stroke);
+      font-weight: 700;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+    .kicker .pulse{
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--a1), var(--a3));
+      box-shadow: 0 0 0 6px rgba(167,243,208,.35);
+    }
+
+    .hero h1{
+      margin: 14px 0 8px;
+      font-size: clamp(2rem, 3.2vw, 3.1rem);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      position: relative;
+      z-index: 1;
+    }
+    .hero .role{
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+    .typing{
+      display:inline-block;
+      padding: 6px 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.5);
+      border: 1px solid var(--stroke);
+      margin-top: 10px;
+      font-weight: 700;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+    .summary{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-actions{
+      margin-top: var(--sp-5);
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .btn{
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.6);
+      box-shadow: var(--shadow2);
+      font-weight: 700;
+      color: var(--ink);
+      transition: transform .15s ease, background .15s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.82);
+    }
+    .btn.primary{
+      border-color: rgba(147,197,253,.55);
+      background: linear-gradient(135deg, rgba(147,197,253,.38), rgba(196,181,253,.28));
+    }
+
+    .quick{
+      margin-top: var(--sp-5);
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .pill{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid var(--stroke);
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* Right hero column card */
+    .profile-card{
+      padding: var(--sp-5);
+      display:flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      position: relative;
+      z-index: 1;
+    }
+    .avatar{
+      width: 100%;
+      border-radius: var(--r-lg);
+      overflow:hidden;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.55);
+      box-shadow: var(--shadow2);
+      min-height: 240px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position: relative;
+    }
+    .avatar::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(420px 260px at 20% 20%, rgba(251,207,232,.35), transparent 60%),
+        radial-gradient(520px 320px at 80% 70%, rgba(167,243,208,.30), transparent 60%);
+      pointer-events:none;
+      opacity:.8;
+    }
+    .avatar .placeholder{
+      position: relative;
+      z-index: 1;
+      text-align:center;
+      color: var(--muted);
+      font-weight: 700;
+      padding: var(--sp-4);
+    }
+    /* If you want a real photo, replace .placeholder with <img src="images/yourphoto.png"> */
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .mini{
+      padding: 12px 14px;
+      border-radius: var(--r-md);
+      background: rgba(255,255,255,.55);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow2);
+    }
+    .mini .label{
+      font-size: .85rem;
+      color: var(--soft);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .mini .value{
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    /*
+      =============================================
+      5) Sections, Headings, Cards
+      =============================================
+    */
+    .section{
+      padding: var(--sp-7) 0;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-5);
+    }
+    .section-title{
+      font-size: clamp(1.4rem, 2.2vw, 2.0rem);
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+    .section-sub{
+      margin: 6px 0 0;
+      color: var(--muted);
+      max-width: 62ch;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-4);
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-4);
+    }
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .mini-grid{ grid-template-columns: 1fr; }
+      .nav-inner{ align-items:flex-start; }
+      .nav-links{ justify-content:flex-start; }
+    }
+
+    .card{
+      background: var(--card2);
+      border: 1px solid var(--stroke);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow2);
+      padding: var(--sp-5);
+    }
+    .card h3{
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+    .muted{ color: var(--muted); }
+    .small{ font-size: .95rem; line-height: 1.65; }
+
+    /*
+      =============================================
+      6) Timeline (Experience)
+      =============================================
+    */
+    .timeline{
+      position: relative;
+      padding-left: 22px;
+    }
+    .timeline::before{
+      content:"";
+      position:absolute;
+      left: 9px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(147,197,253,.8), rgba(196,181,253,.65), rgba(167,243,208,.7));
+      border-radius: 2px;
+    }
+    .t-item{
+      position: relative;
+      padding: 0 0 var(--sp-5) 0;
+    }
+    .t-dot{
+      position:absolute;
+      left: -22px;
+      top: 4px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--a3), var(--a2));
+      border: 2px solid rgba(255,255,255,.85);
+      box-shadow: 0 8px 18px rgba(15,23,42,.12);
+    }
+    .t-role{
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .t-meta{
+      margin-top: 6px;
+      color: var(--soft);
+      font-weight: 600;
+      font-size: .95rem;
+    }
+    .t-bullets{
+      margin: 12px 0 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .t-bullets li{ margin: 8px 0; }
+
+    /*
+      =============================================
+      7) Skills Chips + Tools Grid
+      =============================================
+    */
+    .chips{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .chip{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid var(--stroke);
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .chip strong{ color: var(--ink); }
+
+    .tools{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .tool{
+      padding: 12px 14px;
+      border-radius: var(--r-md);
+      background: rgba(255,255,255,.6);
+      border: 1px solid var(--stroke);
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .tool .name{
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .tool .desc{
+      color: var(--soft);
+      font-weight: 600;
+      font-size: .92rem;
+      line-height: 1.5;
+    }
+    @media (max-width: 980px){
+      .tools{ grid-template-columns: 1fr; }
+    }
+
+    /*
+      =============================================
+      8) Achievements
+      =============================================
+    */
+    .ach-list{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .ach-list li{ margin: 10px 0; }
+    .badge-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: var(--sp-4);
+      border-radius: var(--r-lg);
+      background: rgba(255,255,255,.55);
+      border: 1px solid var(--stroke);
+      overflow:hidden;
+    }
+    .badge-wrap iframe{
+      width: 100%;
+      max-width: 460px;
+      height: 165px;
+    }
+
+    /*
+      =============================================
+      9) Contact / Footer
+      =============================================
+    */
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: var(--sp-4);
+      align-items: start;
+    }
+    @media (max-width: 980px){
+      .contact-grid{ grid-template-columns: 1fr; }
+    }
+    .contact-list{
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .contact-item{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+      padding: 12px 14px;
+      border-radius: var(--r-md);
+      background: rgba(255,255,255,.6);
+      border: 1px solid var(--stroke);
+    }
+    .contact-item .k{
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      min-width: 120px;
+    }
+    .contact-item .v{
+      color: var(--muted);
+      font-weight: 600;
+      overflow-wrap:anywhere;
+    }
+
+    .footer{
+      padding: var(--sp-6) 0 var(--sp-7);
+      color: var(--soft);
+      text-align:center;
+      font-weight: 600;
+    }
+
+    /*
+      =============================================
+      10) Reduced motion support
+      =============================================
+    */
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    =============================================
+    Sticky Navbar
+    =============================================
+  -->
+  <header class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Go to top">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span>
+            MD Shourav Hossain
+            <small>IT Officer • DevOps • Cybersecurity</small>
+          </span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <!-- NOTE: I kept this minimal and focused. Too many sections makes it noisy. -->
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#skills">Skills</a>
+          <a href="#achievements">Achievements</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!--
+    =============================================
+    HERO
+    =============================================
+  -->
+  <main id="top" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- Left: Intro -->
+        <section class="glass hero-card" aria-label="Intro">
+          <span class="kicker"><span class="pulse" aria-hidden="true"></span> Open to serious roles in IT / Security / DevOps</span>
+
+          <h1>Build secure, stable systems.<br>Not “just IT support”.</h1>
+
+          <div class="role">
+            IT Officer & DevOps Engineer • System Hardening • Monitoring • Incident Prevention
+          </div>
+
+          <!-- Typing highlight -->
+          <div class="typing" aria-live="polite">
+            <span id="typingText"></span><span id="cursor">▍</span>
+          </div>
+
+          <p class="summary">
+            I work across Linux and Windows environments to keep infrastructure reliable, monitored, and secure.
+            My focus is disciplined operations: access control, hardening, vulnerability discovery, and automation.
+          </p>
+
+          <div class="hero-actions">
+            <!-- Primary CTA -->
+            <a class="btn primary" href="#contact">Contact Me</a>
+            <!-- External profiles -->
+            <a class="btn" href="https://www.linkedin.com/in/rhshourav" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://github.com/rhshourav" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" href="https://tryhackme.com/p/rhshourav.og" target="_blank" rel="noopener">TryHackMe</a>
+          </div>
+
+          <div class="quick" aria-label="Quick highlights">
+            <!-- These are intentionally short: recruiters skim. -->
+            <span class="pill">ERP + Infrastructure Ops</span>
+            <span class="pill">Monitoring & Security Tooling</span>
+            <span class="pill">Docker Fundamentals</span>
+            <span class="pill">Basic Network Pentesting</span>
+          </div>
+        </section>
+
+        <!-- Right: Profile / Stats -->
+        <aside class="glass profile-card" aria-label="Profile summary">
+          <div class="avatar" role="img" aria-label="Profile photo placeholder">
+            <!-- Replace this div with an actual image if you want:
+              <img src="images/photo.png" alt="MD Shourav Hossain">
+            -->
+            <div class="placeholder">
+              Add your photo here<br>
+              <span style="font-weight:600; color: var(--soft); font-size:.95rem;">
+                (Recommended: clean headshot, neutral background)
+              </span>
+            </div>
+          </div>
+
+          <div class="mini-grid" aria-label="Quick facts">
+            <div class="mini">
+              <div class="label">Location</div>
+              <div class="value">Dhaka, Bangladesh</div>
+            </div>
+            <div class="mini">
+              <div class="label">Current Role</div>
+              <div class="value">IT Officer</div>
+            </div>
+            <div class="mini">
+              <div class="label">Focus</div>
+              <div class="value">Security + Ops</div>
+            </div>
+            <div class="mini">
+              <div class="label">Study</div>
+              <div class="value">BSc CSE (Ongoing)</div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!--
+    =============================================
+    EXPERIENCE
+    =============================================
+  -->
+  <section id="experience" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Experience</h2>
+          <p class="section-sub">
+            Timeline view: clearer than two-column “boxes.” This reads like a real resume, not a blog.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="timeline">
+
+          <!-- Current Role -->
+          <div class="t-item">
+            <span class="t-dot" aria-hidden="true"></span>
+            <p class="t-role">IT Officer — Unimas Sportswear Limited (Mainland Holdings Ltd., HK)</p>
+            <div class="t-meta">Bagbari, Kashimpur, Gazipur • Oct 2022 — Present</div>
+            <ul class="t-bullets">
+              <li>Operate and maintain ERP systems and supporting infrastructure with uptime and data integrity focus.</li>
+              <li>Coordinate daily IT operations (roles, task assignment, team alignment) to keep workflows stable.</li>
+              <li>Maintain and optimize network infrastructure for reliable connectivity and performance.</li>
+              <li>Apply cybersecurity best practices: access control hygiene, system hardening, and incident prevention.</li>
+              <li>Perform basic network penetration testing to identify vulnerabilities and support risk mitigation.</li>
+              <li>Collaborate cross-functionally to align IT solutions with business needs and operational efficiency.</li>
+            </ul>
+          </div>
+
+          <!-- Previous Role -->
+          <div class="t-item" style="padding-bottom:0;">
+            <span class="t-dot" aria-hidden="true"></span>
+            <p class="t-role">Jr. IT Support Officer — Ishwardi EPZ</p>
+            <div class="t-meta">Ishwardi, Pakshi, Pabna • Feb 2022 — Aug 2022</div>
+            <ul class="t-bullets">
+              <li>Maintained IT infrastructure with emphasis on network lines and CCTV system reliability.</li>
+              <li>Troubleshot network connectivity issues and restored service quickly to reduce downtime.</li>
+              <li>Installed and maintained CCTV cameras, ensuring continuous operational visibility.</li>
+              <li>Delivered hands-on technical support for day-to-day IT needs with a security-aware mindset.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    =============================================
+    EDUCATION
+    =============================================
+  -->
+  <section id="education" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Education</h2>
+          <p class="section-sub">
+            Short, clean, and scan-friendly. Recruiters do not read paragraphs here.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>BSc in Computer Science (Ongoing)</h3>
+          <p class="muted small"><strong>Northern University Bangladesh</strong><br>Ashkona, Dakshinkhan, Dhaka-1230</p>
+          <p class="muted small">CGPA: On-going</p>
+        </div>
+
+        <div class="card">
+          <h3>Diploma in Electrical Engineering</h3>
+          <p class="muted small"><strong>Bangladesh Polytechnic Institute</strong><br>Rajshahi</p>
+          <p class="muted small">CGPA: 3.59 (Completed Feb 2021)</p>
+        </div>
+
+        <div class="card">
+          <h3>Secondary School Certificate</h3>
+          <p class="muted small"><strong>Biddut Unnayan Board High School</strong><br>Bheramara, Kushtia</p>
+          <p class="muted small">GPA: 4.27 (Completed Jan 2017)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    =============================================
+    SKILLS
+    =============================================
+  -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Skills</h2>
+          <p class="section-sub">
+            Chips for fast scanning + a tools grid that signals real capability (not buzzwords).
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Core Capabilities</h3>
+          <div class="chips" aria-label="Skill chips">
+            <span class="chip"><strong>Cybersecurity</strong> fundamentals</span>
+            <span class="chip"><strong>System hardening</strong> (Win/Linux)</span>
+            <span class="chip"><strong>Monitoring</strong> & alerting</span>
+            <span class="chip"><strong>Access control</strong> hygiene</span>
+            <span class="chip"><strong>AD</strong> basics</span>
+            <span class="chip"><strong>HCI</strong> familiarity</span>
+            <span class="chip"><strong>CI/CD</strong> concepts</span>
+            <span class="chip"><strong>Docker</strong> fundamentals</span>
+            <span class="chip"><strong>Cloudflare Workers</strong> deployments</span>
+            <span class="chip"><strong>Network pentesting</strong> (basic)</span>
+            <span class="chip"><strong>IoT</strong> (Arduino/ESP/RPi)</span>
+            <span class="chip"><strong>Python</strong> scripting</span>
+            <span class="chip"><strong>HTML/CSS</strong> front-end</span>
+          </div>
+
+          <p class="muted small" style="margin-top:14px;">
+            <!-- NOTE: This statement keeps it honest. Overclaiming is a fast way to fail interviews. -->
+            I don’t claim “expert” in everything. I focus on operational reliability + security discipline, and I keep building depth.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Security / Ops Tooling</h3>
+          <div class="tools" aria-label="Tools list">
+            <div class="tool">
+              <div class="name">Nmap</div>
+              <div class="desc">Recon, port scanning, basic validation.</div>
+            </div>
+            <div class="tool">
+              <div class="name">Wireshark</div>
+              <div class="desc">Traffic analysis and troubleshooting.</div>
+            </div>
+            <div class="tool">
+              <div class="name">Nessus</div>
+              <div class="desc">Vulnerability assessment workflows.</div>
+            </div>
+            <div class="tool">
+              <div class="name">Burp Suite</div>
+              <div class="desc">Web security testing basics.</div>
+            </div>
+            <div class="tool">
+              <div class="name">Metasploit</div>
+              <div class="desc">Controlled exploitation lab use.</div>
+            </div>
+            <div class="tool">
+              <div class="name">Git / GitHub</div>
+              <div class="desc">Version control and collaboration.</div>
+            </div>
+            <div class="tool">
+              <div class="name">Docker</div>
+              <div class="desc">Container packaging fundamentals.</div>
+            </div>
+            <div class="tool">
+              <div class="name">Cloudflare Workers</div>
+              <div class="desc">Lightweight services & automation.</div>
+            </div>
+            <div class="tool">
+              <div class="name">Monitoring</div>
+              <div class="desc">Uptime + security posture awareness.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    =============================================
+    ACHIEVEMENTS
+    =============================================
+  -->
+  <section id="achievements" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Achievements</h2>
+          <p class="section-sub">
+            Proof beats claims. Certifications + consistent completion signals discipline.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>TryHackMe Milestones</h3>
+          <ul class="ach-list">
+            <li><strong>Pre Security Certification</strong> (Nov 2025) — Credential ID: THM-BGYIYHOFHF</li>
+            <li><strong>Advent of Cyber 2025</strong> — Cloud security, detection engineering, threat simulation, incident response</li>
+            <li><strong>Advent of Cyber 2024</strong> — Cloud security, detection engineering, threat simulation</li>
+            <li><strong>Advent of Cyber 2023</strong> — Web app security, malware analysis, blue team tactics</li>
+            <li><strong>Advent of Cyber 2021</strong> (May 2022) — Networking, secure coding, cryptography</li>
+            <li><strong>Advent of Cyber 2020</strong> (Jul 2021) — Fundamentals, password attacks, privilege escalation</li>
+          </ul>
+
+          <p class="muted small" style="margin-top:14px;">
+            <!-- This line is deliberate: it frames your THM work as applied practice, not “gaming.” -->
+            I use TryHackMe as structured practice to build repeatable skills, not as a vanity scoreboard.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Public Badge</h3>
+          <div class="badge-wrap" aria-label="TryHackMe badge">
+            <!-- Your requested badge iframe -->
+            <iframe
+              src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=533634"
+              style="border:none;"
+              loading="lazy"
+              title="TryHackMe Public Profile Badge"
+            ></iframe>
+          </div>
+          <p class="muted small" style="margin-top:12px;">
+            If the badge doesn’t load on some networks, it’s usually an iframe policy or blocked third-party content.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    =============================================
+    CONTACT
+    =============================================
+  -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Contact</h2>
+          <p class="section-sub">
+            Keep it simple. Make it easy to reach you. No clutter.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card">
+          <h3>Reach Me</h3>
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="k">Phone</div>
+              <div class="v"><a href="tel:+8801755448683">+8801755448683</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="k">Email</div>
+              <div class="v"><a href="mailto:rhshourav02@gmail.com">rhshourav02@gmail.com</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="k">Work Email</div>
+              <div class="v"><a href="mailto:shourav.it@mainland-bd.com">shourav.it@mainland-bd.com</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="k">LinkedIn</div>
+              <div class="v"><a href="https://www.linkedin.com/in/rhshourav" target="_blank" rel="noopener">linkedin.com/in/rhshourav</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="k">GitHub</div>
+              <div class="v"><a href="https://github.com/rhshourav" target="_blank" rel="noopener">github.com/rhshourav</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="k">TryHackMe</div>
+              <div class="v"><a href="https://tryhackme.com/p/rhshourav.og" target="_blank" rel="noopener">tryhackme.com/p/rhshourav.og</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>What I’m targeting</h3>
+          <p class="muted small">
+            <!-- This is the “positioning” section. It stops you from looking like you apply to everything. -->
+            Roles where I can combine <strong>secure operations</strong> and <strong>automation</strong>:
+            IT Officer / SysAdmin, Jr. DevOps, SOC/Blue-Team trainee roles, or Security-focused IT operations.
+          </p>
+
+          <p class="muted small" style="margin-top:12px;">
+            If you want this to look even more premium, add:
+            a real headshot, a “Projects” section with 3–5 real items (GitHub links), and a downloadable PDF CV button.
+          </p>
+
+          <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn primary" href="mailto:rhshourav02@gmail.com?subject=Interview%20Opportunity%20-%20MD%20Shourav%20Hossain">Email Me</a>
+            <a class="btn" href="https://github.com/rhshourav" target="_blank" rel="noopener">View GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        © <span id="year"></span> MD Shourav Hossain • Built for clarity, not noise.
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /*
+      =============================================
+      Minimal JS
+      1) Typing effect in hero
+      2) Active nav section highlighting
+      3) Footer year
+      =============================================
+    */
+
+    // 1) Typing effect
+    const typingEl = document.getElementById("typingText");
+    const cursorEl = document.getElementById("cursor");
+
+    const roles = [
+      "IT Officer",
+      "DevOps (Foundations)",
+      "Cybersecurity Practitioner",
+      "Infrastructure Monitoring",
+      "System Hardening"
+    ];
+
+    let r = 0, i = 0, deleting = false;
+
+    function tick(){
+      const word = roles[r];
+      if(!deleting){
+        typingEl.textContent = word.slice(0, i++);
+        if(i > word.length + 10){ deleting = true; }
+      } else {
+        typingEl.textContent = word.slice(0, i--);
+        if(i <= 0){
+          deleting = false;
+          r = (r + 1) % roles.length;
+        }
+      }
+      const speed = deleting ? 40 : 70;
+      setTimeout(tick, speed);
+    }
+    tick();
+
+    // Cursor blink
+    setInterval(() => {
+      cursorEl.style.opacity = (cursorEl.style.opacity === "0" ? "1" : "0");
+    }, 520);
+
+    // 2) Active nav highlighting based on scroll position
+    const sections = ["experience","education","skills","achievements","contact"].map(id => document.getElementById(id));
+    const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+
+    function setActive(){
+      const y = window.scrollY + 120;
+      let current = "experience";
+      for(const s of sections){
+        if(s.offsetTop <= y) current = s.id;
+      }
+      navLinks.forEach(a => {
+        a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+      });
+    }
+    window.addEventListener("scroll", setActive);
+    setActive();
+
+    // 3) Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
