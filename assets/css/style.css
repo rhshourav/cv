@@ -113,6 +113,13 @@ a:focus{ outline:none; box-shadow: var(--focus); border-radius: 12px; }
   background: color-mix(in srgb, var(--card) 85%, transparent);
   border-bottom: 1px solid var(--stroke);
 }
+/* Navbar button sizing (reuses .btn theme) */
+.nav-btn{
+  padding: 10px 12px;
+  font-weight: 800;
+  box-shadow: var(--shadow2);
+}
+
 .nav-inner{
   display:flex;
   align-items:center;
