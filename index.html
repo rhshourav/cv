@@ -155,8 +155,6 @@
               loading="lazy"
             />
           </div>
-        </aside>
-
 
           <div class="mini-grid" aria-label="Quick facts">
             <div class="mini">
@@ -356,7 +354,35 @@
       </div>
 
       <div class="contact-grid">
-        <div class="card">
+        
+<div class="card span-2">
+  <h3>Anonymous Message</h3>
+  <p class="muted small">
+    Send a message via my Cloudflare Worker. No name required.
+  </p>
+
+  <form id="anonForm" class="anon-form" autocomplete="off" novalidate>
+    <!-- Honeypot (bots fill this; humans won't) -->
+    <input type="text" id="website" name="website" class="hp" tabindex="-1" autocomplete="off" />
+
+    <label class="field">
+      <span class="label">Message</span>
+      <textarea
+        id="anonMessage"
+        class="control"
+        rows="5"
+        maxlength="1200"
+        placeholder="Write your message... (max 1200 chars)"
+        required
+      ></textarea>
+    </label>
+
+    <div class="action-row">
+      <button type="submit" class="btn primary nav-btn">Send</button>
+      <span id="anonStatus" class="muted small" aria-live="polite"></span>
+    </div>
+
+<div class="card">
           <h3>Reach Me</h3>
 
           <div class="contact-list">
@@ -393,6 +419,8 @@
             Roles that combine <strong>secure operations</strong> and <strong>automation</strong>:
             IT Officer / SysAdmin, Jr. DevOps, SOC/Blue-Team trainee roles, or security-focused IT operations.
           </p>
+</form>
+</div>
 
           <div class="mt-14 action-row">
             <a class="btn primary" href="mailto:rhshourav02@gmail.com?subject=Interview%20Opportunity%20-%20MD%20Shourav%20Hossain">Email Me</a>

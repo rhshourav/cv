@@ -4,6 +4,7 @@
   - Theme: system preference + localStorage + toggle button
   - Typing effect
   - Active nav highlighting
+  - Anonymous message via Cloudflare Worker
   - Footer year
   ============================================================
 */
@@ -17,16 +18,15 @@
   const STORAGE_KEY = "shourav_theme";
 
   function getSystemTheme() {
-    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+    return window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
   }
 
   function applyTheme(theme) {
-    // THIS is the key line: CSS animations depend on this attribute
     html.setAttribute("data-theme", theme);
 
-    // Update button accessibility state (SVG animation is handled by CSS)
     if (toggleBtn) {
       const isDark = theme === "dark";
       toggleBtn.setAttribute("aria-pressed", String(isDark));
@@ -34,12 +34,10 @@
     }
   }
 
-  // Initial theme load:
   const saved = localStorage.getItem(STORAGE_KEY);
   const initial = saved || getSystemTheme();
   applyTheme(initial);
 
-  // Toggle handler:
   if (toggleBtn) {
     toggleBtn.addEventListener("click", () => {
       const current = html.getAttribute("data-theme") || "light";
@@ -49,7 +47,6 @@
     });
   }
 
-  // Follow system changes ONLY if user has not chosen manually
   if (!saved && window.matchMedia) {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     mq.addEventListener("change", () => applyTheme(getSystemTheme()));
@@ -92,7 +89,8 @@
     tick();
 
     setInterval(() => {
-      cursorEl.style.opacity = (cursorEl.style.opacity === "0" ? "1" : "0");
+      cursorEl.style.opacity =
+        cursorEl.style.opacity === "0" ? "1" : "0";
     }, 520);
   }
 
@@ -100,7 +98,10 @@
   // 3) Active nav highlight
   // ---------------------------
   const sectionIds = ["experience", "education", "skills", "achievements", "contact"];
-  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  const sections = sectionIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
   const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
 
   function setActiveNav() {
@@ -120,7 +121,70 @@
   setActiveNav();
 
   // ---------------------------
-  // 4) Footer year
+  // 4) Anonymous Message -> Cloudflare Worker
+  // ---------------------------
+  const anonForm = document.getElementById("anonForm");
+  const anonMessage = document.getElementById("anonMessage");
+  const anonStatus = document.getElementById("anonStatus");
+  const honeypot = document.getElementById("website");
+
+  const MSG_ENDPOINT = "https://cryocore.rhshourav02.workers.dev/message";
+  const MSG_TOKEN = "shourav"; // public; protect server-side
+
+  function setStatus(msg) {
+    if (anonStatus) anonStatus.textContent = msg;
+  }
+
+  async function postJson(url, data) {
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    let payload = null;
+    const ct = r.headers.get("content-type") || "";
+    if (ct.includes("application/json")) {
+      payload = await r.json().catch(() => null);
+    }
+
+    if (!r.ok || (payload && payload.ok === false)) {
+      throw new Error((payload && payload.error) || `HTTP ${r.status}`);
+    }
+
+    return payload || { ok: true };
+  }
+
+  if (anonForm && anonMessage) {
+    anonForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (honeypot && honeypot.value.trim().length > 0) return;
+
+      const msg = anonMessage.value.trim();
+      if (msg.length < 5) {
+        setStatus("Message too short.");
+        return;
+      }
+
+      setStatus("Sending...");
+
+      try {
+        await postJson(MSG_ENDPOINT, {
+          token: MSG_TOKEN,
+          text: `Website Anonymous Message:\n${msg}`,
+        });
+
+        anonMessage.value = "";
+        setStatus("Sent.");
+      } catch (err) {
+        setStatus(`Failed: ${err.message}`);
+      }
+    });
+  }
+
+  // ---------------------------
+  // 5) Footer year
   // ---------------------------
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());

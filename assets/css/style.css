@@ -113,36 +113,30 @@ a:focus{ outline:none; box-shadow: var(--focus); border-radius: 12px; }
   background: color-mix(in srgb, var(--card) 85%, transparent);
   border-bottom: 1px solid var(--stroke);
 }
-/* Navbar button sizing (reuses .btn theme) */
-.nav-btn {
+/* Navbar button sizing + micro-animation (reuses .btn theme) */
+.nav-btn{
   padding: 7px 12px;
   font-size: 0.82rem;
   font-weight: 700;
   border-radius: 999px; /* pill shape */
   line-height: 1;
-}
-.nav-btn {
   position: relative;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  animation: softPulse 1.6s ease-out 1;
 }
 
 .nav-btn:hover,
-.nav-btn:focus-visible {
+.nav-btn:focus-visible{
   transform: translateY(-1px);
-  box-shadow: var(--shadow3);
+  box-shadow: var(--shadow2);
   filter: brightness(1.05);
 }
-@keyframes softPulse {
+
+@keyframes softPulse{
   0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.25); }
   100% { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
 }
 
-.nav-btn {
-  animation: softPulse 1.6s ease-out 1;
-}
 
 .nav-inner{
   display:flex;
@@ -757,6 +751,46 @@ html[data-theme="dark"] .theme-svg .moon{
   .nav-right{ width: 100%; justify-content: space-between; }
   .nav-links{ justify-content:flex-start; }
   .contact-grid{ grid-template-columns: 1fr; }
+}
+/* Contact grid helper: full-width card row */
+.span-2{ grid-column: 1 / -1; }
+
+/* Anonymous message form */
+.anon-form{ margin-top: 10px; display: grid; gap: 12px; }
+.field{ display: grid; gap: 8px; }
+.label{ font-weight: 900; letter-spacing: -0.02em; color: var(--muted); font-size: .92rem; }
+
+.control{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--card2) 85%, transparent);
+  border: 1px solid var(--stroke);
+  color: var(--ink);
+  outline: none;
+  font: inherit;
+  font-weight: 700;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.control::placeholder{
+  color: color-mix(in srgb, var(--muted) 65%, transparent);
+}
+
+.control:focus{
+  box-shadow: var(--focus);
+  border-color: color-mix(in srgb, var(--a3) 45%, transparent);
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--card2) 95%, transparent);
+}
+
+/* Hide honeypot */
+.hp{
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
 }
 
 /* 12) REDUCED MOTION */
