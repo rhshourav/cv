@@ -59,37 +59,8 @@
             aria-label="Toggle theme"
             aria-pressed="false"
             >
-            <svg
-              class="theme-svg"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <!-- Sun -->
-              <circle class="sun" cx="12" cy="12" r="4" />
-              <g class="rays">
-                <path d="M12 1v3" />
-                <path d="M12 20v3" />
-                <path d="M4.22 4.22l2.12 2.12" />
-                <path d="M17.66 17.66l2.12 2.12" />
-                <path d="M1 12h3" />
-                <path d="M20 12h3" />
-                <path d="M4.22 19.78l2.12-2.12" />
-                <path d="M17.66 6.34l2.12-2.12" />
-              </g>
-
-              <!-- Moon (modern crescent using mask) -->
-              <mask id="moon-mask">
-                <rect width="100%" height="100%" fill="white"/>
-                <circle cx="15" cy="9" r="6" fill="black"/>
-              </mask>
-              <circle
-                class="moon"
-                cx="12"
-                cy="12"
-                r="6"
-                mask="url(#moon-mask)"
-              />
-            </svg>
+            <span class="icon-sun" aria-hidden="true">☀</span>
+            <span class="icon-moon" aria-hidden="true">☾</span>
           </button>
 
 
@@ -227,7 +198,7 @@
       <div class="section-head">
         <div>
           <h2 class="section-title">Education</h2>
-          <p class="section-sub">Academic: </p>
+          <p class="section-sub">Academic </p>
         </div>
       </div>
 
