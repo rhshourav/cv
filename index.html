@@ -21,6 +21,9 @@
 
   <!-- Main CSS -->
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Icons (for mobile nav) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -42,6 +45,17 @@
         </a>
 
         <div class="nav-right">
+          <!-- Mobile menu button (visible on small screens only) -->
+          <button
+            id="mobileMenuBtn"
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-controls="mobileSidebar"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+          </button>
+
           <nav class="nav-links" aria-label="Primary">
             <a href="#experience">Experience</a>
             <a href="#education">Education</a>
@@ -69,6 +83,20 @@
     </div>
   </header>
 
+  <!-- Mobile sidebar + overlay (only used on small screens) -->
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+
+  <aside class="mobile-sidebar" id="mobileSidebar" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="close-btn" id="closeSidebar" aria-label="Close menu">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+    <a href="#experience"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Experience</a>
+    <a href="#education"><i class="fa-solid fa-book" aria-hidden="true"></i> Education</a>
+    <a href="#skills"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Skills</a>
+    <a href="#achievements"><i class="fa-solid fa-award" aria-hidden="true"></i> Achievements</a>
+    <a href="#contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact</a>
+  </aside>
+  
   <!-- HERO -->
   <main id="top" class="hero">
     <div class="container">

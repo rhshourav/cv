@@ -121,6 +121,51 @@
   setActiveNav();
 
   // ---------------------------
+  // 3.5) Mobile sidebar nav (small screens)
+  // ---------------------------
+  const menuBtn = document.getElementById("mobileMenuBtn");
+  const sidebar = document.getElementById("mobileSidebar");
+  const overlay = document.getElementById("mobileOverlay");
+  const closeBtn = document.getElementById("closeSidebar");
+
+  function setMobileNav(open) {
+    if (!sidebar || !overlay || !menuBtn) return;
+
+    sidebar.classList.toggle("open", open);
+    overlay.classList.toggle("show", open);
+
+    sidebar.setAttribute("aria-hidden", String(!open));
+    menuBtn.setAttribute("aria-expanded", String(open));
+
+    // lock scroll while open
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+
+  function toggleMobileNav() {
+    if (!sidebar) return;
+    setMobileNav(!sidebar.classList.contains("open"));
+  }
+
+  if (menuBtn && sidebar && overlay) {
+    menuBtn.addEventListener("click", toggleMobileNav);
+    overlay.addEventListener("click", () => setMobileNav(false));
+  }
+  if (closeBtn) closeBtn.addEventListener("click", () => setMobileNav(false));
+
+  // Close when clicking a link
+  if (sidebar) {
+    sidebar.addEventListener("click", (e) => {
+      const a = e.target && e.target.closest ? e.target.closest("a") : null;
+      if (a) setMobileNav(false);
+    });
+  }
+
+  // Close on ESC
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setMobileNav(false);
+  });
+
+  // ---------------------------
   // 4) Anonymous Message -> Cloudflare Worker
   // ---------------------------
   const anonForm = document.getElementById("anonForm");
